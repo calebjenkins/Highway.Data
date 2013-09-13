@@ -63,6 +63,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\IContextConfiguration.cs" />
     <Compile Include="Filtering\AndCriteria.cs" />
     <Compile Include="Filtering\BasicCriteria.cs" />
     <Compile Include="Filtering\CombinationCriteria.cs" />

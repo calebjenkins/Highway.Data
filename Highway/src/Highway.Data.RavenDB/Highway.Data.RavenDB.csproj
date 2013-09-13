@@ -63,6 +63,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\IContextConfiguration.cs" />
     <Compile Include="Contexts\DataContext.cs" />
     <Compile Include="Contexts\DocumentSessionDataContext.cs" />
     <Compile Include="Extensions\LoggingTraceExtensions.cs" />

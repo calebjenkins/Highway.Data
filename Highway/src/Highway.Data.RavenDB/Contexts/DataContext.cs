@@ -18,17 +18,28 @@ namespace Highway.Data
         private readonly ILog _log;
         private IEventManager _eventManager;
 
-        #region IObservableDataContext Members
-
-        public DataContext(IDocumentSession session, ILog log, IEventManager eventManager)
+        public DataContext(IDocumentSession session) :
+            this(session, null, new NoOpLogger())
         {
-            _log = log;
-            _eventManager = eventManager;
-            _session = session;
         }
 
+        public DataContext(IDocumentSession session, ILog log) :
+            this(session, null, log)
+        {
+        }
+
+        public DataContext(IDocumentSession session, IContextConfiguration contextConfiguration, ILog log)
+        {
+            _log = log;
+            _session = session;
+            if (contextConfiguration != null)
+                contextConfiguration.ConfigureContext(this);
+        }
+
+        #region IObservableDataContext Members
+
         /// <summary>
-        /// This gives a mockable wrapper around the normal <see cref="DbSet{T}"/> method that allows for testablity
+        /// This gives creates an <see cref="IQueryable{T}"/> method that allows for testablity
         /// </summary>
         /// <typeparam name="T">The Entity being queried</typeparam>
         /// <returns><see cref="IQueryable{T}"/></returns>
