@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.Objects;
 using System.Linq;
 using Highway.Data;
+using System.Data.Entity.Core.Objects;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.Objects;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -12,6 +11,7 @@ using Highway.Data;
 using Highway.Data.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
+using System.Data.Entity.Core.Objects;
 
 namespace Highway.Data.EntityFramework.Tests.UnitTests
 {
