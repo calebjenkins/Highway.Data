@@ -1,7 +1,7 @@
 Framework "4.0"
 
 properties {
-    $build_config = "Release"
+    $build_config = @("NET40","NET45")
     $pack_dir = ".\pack"
 }
 
@@ -23,7 +23,7 @@ task test-all {
 }
 
 task build-all {
-    rebuild .\Highway\Highway.sln
+    $build_config | % { rebuild .\Highway\Highway.sln $_ }
 }
 
 task pack-all -depends nuget-clean{
@@ -46,8 +46,8 @@ task nuget-clean {
     }
 }
 
-function rebuild([string]$slnPath) { 
-    exec { msbuild $slnPath /t:rebuild /v:q /clp:ErrorsOnly /nologo /p:Configuration=$build_config }
+function rebuild([string]$slnPath, [string] $config) { 
+    exec { msbuild $slnPath /t:rebuild /v:q /clp:ErrorsOnly /nologo /p:Configuration=$config }
 }
 
 function create-packs {
