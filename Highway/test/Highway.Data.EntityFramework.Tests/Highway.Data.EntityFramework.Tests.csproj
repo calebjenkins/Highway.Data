@@ -168,6 +168,7 @@
     <Compile Include="Mapping\BarMappingConfiguration.cs" />
     <Compile Include="Mapping\BaseMappingConfiguration.cs" />
     <Compile Include="Mapping\BazMappingConfiguration.cs" />
+    <Compile Include="IntegrationTests\ObjectMappingDetailTests.cs" />
     <Compile Include="Mapping\QuxMappingConfiguration.cs" />
     <Compile Include="Performance\Given_A_Query_Can_Performance_Test_IT.cs" />
     <Compile Include="Queries\FindWhereTests.cs" />

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
 
-namespace Highway.Data.EntityFramework.Extensions
+namespace Highway.Data
 {
-    internal static class Extensions
+    public static class Extensions
     {
         internal static IEnumerable<PropertyInfo> GetPrimaryKeyFieldsFor(this IObjectContextAdapter context, Type entityType)
         {
@@ -69,5 +70,46 @@ namespace Highway.Data.EntityFramework.Extensions
 
             return set != null ? set.Name : null;
         }
+
+        public static MappingDetail GetMappingFor<T>(this IDataContext context)
+        {
+            return GetMappingFor(context, typeof(T));
+        }
+
+        public static MappingDetail GetMappingFor(this IDataContext context, Type entityType)
+        {
+            var typedContext = context as DbContext;
+            if (typedContext == null)
+            {
+                return null;
+            }
+
+            var metadata = ((IObjectContextAdapter)typedContext).ObjectContext.MetadataWorkspace
+                   .GetItems<EntityType>(DataSpace.OSpace)
+                   .SingleOrDefault(p => p.FullName == entityType.FullName);
+
+            if (metadata == null)
+            {
+                throw new InvalidOperationException(String.Format("The type {0} is not known to the DbContext.", entityType.FullName));
+            }
+
+            var properties = metadata.Properties.Select(k => entityType.GetProperty(k.Name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)).Select(x => new PropertyDetail()
+                                                                                                                                                                                   {
+                                                                                                                                                                                       Property = x
+                                                                                                                                                                                   }).ToList();
+            return new MappingDetail() { Properties = properties, };
+        }
+    }
+
+    public class MappingDetail
+    {
+        public List<PropertyDetail> Properties { get; set; }
+    }
+
+    public class PropertyDetail
+    {
+        public PropertyInfo Property { get; set; }
+
+        public string ColumnName { get; set; }
     }
 }
