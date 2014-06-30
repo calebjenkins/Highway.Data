@@ -116,7 +116,7 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
         {
             //Arrange
             var domain = new TestDomain();
-            var interceptor = new AppendWhere<Foo>(1, foo => foo.Name == "Test", typeof(AllFoos));
+            var interceptor = new AppendWhere<Foo>(1, foo => foo.FullName == "Test", typeof(AllFoos));
             domain.Events = new List<IInterceptor>
             {
                 interceptor
@@ -125,8 +125,8 @@ namespace Highway.Data.EntityFramework.Tests.AdvancedFeatures.EventManagement
 
             //act
             var inMemoryDomainContext = new InMemoryDomainContext<TestDomain>();
-            inMemoryDomainContext.Add(new Foo() {Name = "Test"});
-            inMemoryDomainContext.Add(new Foo() {Name = "Should Not Show up"});
+            inMemoryDomainContext.Add(new Foo() {FullName = "Test"});
+            inMemoryDomainContext.Add(new Foo() {FullName = "Should Not Show up"});
             inMemoryDomainContext.Commit();
             var repository = new DomainRepository<TestDomain>(inMemoryDomainContext, domain);
             var emptyQuery = new AllFoos();

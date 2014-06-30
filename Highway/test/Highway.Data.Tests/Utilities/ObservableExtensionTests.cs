@@ -16,8 +16,8 @@ namespace Highway.Data.Tests.Utilities
             //Arrange
             var items = new List<Foo>()
             {
-                new Foo() {Name = "Test"},
-                new Foo() {Name = "Test2"}
+                new Foo() {FullName = "Test"},
+                new Foo() {FullName = "Test2"}
             };
 
             //Act

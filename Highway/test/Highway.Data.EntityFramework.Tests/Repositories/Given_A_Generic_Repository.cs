@@ -55,7 +55,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                 {
-                    new Foo {Id = 1, Name = "Test"}
+                    new Foo {Id = 1, FullName = "Test"}
                 }.AsQueryable());
             target = new Repository(context);
 
@@ -67,7 +67,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             Foo foo = result.First();
             foo.Should().NotBeNull();
             foo.Id.Should().Be(1);
-            foo.Name.Should().Be("Test");
+            foo.FullName.Should().Be("Test");
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                 {
-                    new Foo {Id = 1, Name = "Test"}
+                    new Foo {Id = 1, FullName = "Test"}
                 }.AsQueryable());
             target = new Repository(context);
 
@@ -98,7 +98,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                 {
-                    new Foo {Id = 1, Name = "Test"}
+                    new Foo {Id = 1, FullName = "Test"}
                 }.AsQueryable());
             target = new Repository(context);
 
@@ -115,7 +115,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
         {
             //Arrange
             var context = MockRepository.GenerateStrictMock<IDataContext>();
-            var foo = new Foo {Id = 1, Name = "Test"};
+            var foo = new Foo {Id = 1, FullName = "Test"};
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                 {
@@ -139,7 +139,7 @@ namespace Highway.Data.EntityFramework.Tests.Repositories
             context.Expect(x => x.AsQueryable<Foo>()).Return(
                 new List<Foo>
                 {
-                    new Foo {Id = 1, Name = "Test"}
+                    new Foo {Id = 1, FullName = "Test"}
                 }.AsQueryable());
             target = new Repository(context);
 

@@ -23,7 +23,7 @@ namespace Highway.Data.EntityFramework.Tests.TestQueries
                 Name = name;
             }
 
-            [StoredProcedureAttributes.Name("Name")]
+            [StoredProcedureAttributes.Name("FullName")]
             public string Name { get; set; }
         }
 

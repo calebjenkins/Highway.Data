@@ -10,7 +10,7 @@ namespace Highway.Data.Tests.TestDomain
     public class Foo : IIdentifiable<int>
     {
         [StoredProcedureAttributes.Name("testName")]
-        public virtual string Name { get; set; }
+        public virtual string FullName { get; set; }
 
         [StoredProcedureAttributes.Name("testAddress")]
         public virtual string Address { get; set; }

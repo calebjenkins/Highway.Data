@@ -72,7 +72,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
         public void When_Paging_Should_Affect_The_Base_Query_Before_It_Is_Executed()
         {
             //Arrange
-            var targetFoo = new Foo {Name = "Test"};
+            var targetFoo = new Foo {FullName = "Test"};
             var context = MockRepository.GenerateStrictMock<IDataContext>();
             context.Expect(x => x.AsQueryable<Foo>()).Return(new List<Foo>
             {
@@ -89,7 +89,7 @@ namespace Highway.Data.EntityFramework.Tests.Queries
 
 
             //Assert
-            retVal.First().Should().Be(targetFoo.Name);
+            retVal.First().Should().Be(targetFoo.FullName);
         }
 
         [TestMethod]

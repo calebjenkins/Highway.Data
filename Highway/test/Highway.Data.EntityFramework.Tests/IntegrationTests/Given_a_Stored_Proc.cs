@@ -41,8 +41,8 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
             base.BeforeEachTest();
             Database.SetInitializer(new EntityFrameworkIntializer());
             target.AsQueryable<Foo>().ToList();
-            target.Add(new Foo {Name = "Devlin"});
-            target.Add(new Foo {Name = "Tim"});
+            target.Add(new Foo {FullName = "Devlin"});
+            target.Add(new Foo {FullName = "Tim"});
             target.SaveChanges();
         }
 
@@ -57,7 +57,7 @@ namespace Highway.Data.EntityFramework.Tests.IntegrationTests
 
             //Assert
             Assert.IsTrue(results.Any());
-            Assert.IsTrue(results.All(x => x.Name == "Devlin"));
+            Assert.IsTrue(results.All(x => x.FullName == "Devlin"));
         }
     }
 }

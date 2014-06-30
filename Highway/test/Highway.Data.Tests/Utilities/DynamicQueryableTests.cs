@@ -19,18 +19,18 @@ namespace Highway.Data.Tests.Utilities
         public void ShouldFilterByString()
         {
             //Act
-            var results = items.AsQueryable().Where("Name = @0", "Devlin");
+            var results = items.AsQueryable().Where("FullName = @0", "Devlin");
 
             //Assert
             Assert.IsTrue(results.Count() == 1);
-            Assert.AreEqual("Devlin", results.Single().Name);
+            Assert.AreEqual("Devlin", results.Single().FullName);
         }
 
         [TestMethod]
         public void ShouldSelectByString()
         {
             //Act
-            IEnumerable results = items.AsQueryable().Select("new(Name as FirstName)");
+            IEnumerable results = items.AsQueryable().Select("new(FullName as FirstName)");
 
             //Assert
             Assert.IsTrue(results.Count() == 3);
@@ -42,9 +42,9 @@ namespace Highway.Data.Tests.Utilities
     {
         public ICollection<Foo> items = new Collection<Foo>
         {
-            new Foo {Name = "Devlin"},
-            new Foo {Name = "Tim"},
-            new Foo {Name = "Allen"}
+            new Foo {FullName = "Devlin"},
+            new Foo {FullName = "Tim"},
+            new Foo {FullName = "Allen"}
         };
     }
 
@@ -55,18 +55,18 @@ namespace Highway.Data.Tests.Utilities
         public void ShouldFilterByString()
         {
             //Act
-            var results = items.Where("Name = @0", "Devlin");
+            var results = items.Where("FullName = @0", "Devlin");
 
             //Assert
             Assert.IsTrue(results.Count() == 1);
-            Assert.AreEqual("Devlin", results.Single().Name);
+            Assert.AreEqual("Devlin", results.Single().FullName);
         }
 
         [TestMethod]
         public void ShouldSelectByString()
         {
             //Act
-            IEnumerable results = items.Select("new(Name as FirstName)");
+            IEnumerable results = items.Select("new(FullName as FirstName)");
 
             //Assert
             Assert.IsTrue(results.Count() == 3);

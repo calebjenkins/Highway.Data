@@ -20,7 +20,7 @@ namespace Highway.Data.EntityFramework.Tests.TestQueries
         public FindFooName()
         {
             Selector = context => context.AsQueryable<Foo>();
-            Projector = foos => foos.Select(x => x.Name);
+            Projector = foos => foos.Select(x => x.FullName);
         }
     }
 }

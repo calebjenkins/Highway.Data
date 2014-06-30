@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Core.Objects;
@@ -11,6 +12,8 @@ namespace Highway.Data
 {
     public static class Extensions
     {
+        private static MappingDetailFactory _mappingDetailFactory = new MappingDetailFactory();
+
         internal static IEnumerable<PropertyInfo> GetPrimaryKeyFieldsFor(this IObjectContextAdapter context, Type entityType)
         {
             var metadata = context.ObjectContext.MetadataWorkspace
@@ -78,32 +81,16 @@ namespace Highway.Data
 
         public static MappingDetail GetMappingFor(this IDataContext context, Type entityType)
         {
-            var typedContext = context as DbContext;
-            if (typedContext == null)
-            {
-                return null;
-            }
-
-            var metadata = ((IObjectContextAdapter)typedContext).ObjectContext.MetadataWorkspace
-                   .GetItems<EntityType>(DataSpace.OSpace)
-                   .SingleOrDefault(p => p.FullName == entityType.FullName);
-
-            if (metadata == null)
-            {
-                throw new InvalidOperationException(String.Format("The type {0} is not known to the DbContext.", entityType.FullName));
-            }
-
-            var properties = metadata.Properties.Select(k => entityType.GetProperty(k.Name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)).Select(x => new PropertyDetail()
-                                                                                                                                                                                   {
-                                                                                                                                                                                       Property = x
-                                                                                                                                                                                   }).ToList();
-            return new MappingDetail() { Properties = properties, };
+            return _mappingDetailFactory.CreateDetails(context, entityType);
         }
     }
 
     public class MappingDetail
     {
         public List<PropertyDetail> Properties { get; set; }
+        public string Table { get; set; }
+        public string Schema { get; set; }
+
     }
 
     public class PropertyDetail

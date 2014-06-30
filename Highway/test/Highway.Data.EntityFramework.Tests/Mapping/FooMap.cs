@@ -13,7 +13,7 @@ namespace Highway.Data.EntityFramework.Tests.Mapping
         {
             ToTable("Foos");
             HasKey(x => x.Id);
-            Property(x => x.Name).IsOptional();
+            Property(x => x.FullName).HasColumnName("Name").IsOptional();
         }
     }
 }
