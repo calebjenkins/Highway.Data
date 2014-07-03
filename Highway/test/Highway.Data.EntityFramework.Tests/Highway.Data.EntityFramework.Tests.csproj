@@ -164,6 +164,7 @@
     <Compile Include="IntegrationTests\AssemblyConfigurationTests.cs" />
     <Compile Include="IntegrationTests\BasicQueryTests.cs" />
     <Compile Include="IntegrationTests\Given_a_Stored_Proc.cs" />
+    <Compile Include="IntegrationTests\MergeCommandTests.cs" />
     <Compile Include="Logging\Given_A_Context_With_a_Logger.cs" />
     <Compile Include="Mapping\BarMappingConfiguration.cs" />
     <Compile Include="Mapping\BaseMappingConfiguration.cs" />

@@ -53,7 +53,7 @@ namespace Highway.Data
 
                 mappingDetail.Properties = metadata.Properties
                     .Select(k => entityType.GetProperty(k.Name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
-                    .Select(x => new PropertyDetail { Property = x }).ToList();
+                    .Select(x => new PropertyDetail { Property = x}).ToList();
 
                 
                 var setMaps = (storageMetadata.GetPropertyValue("AllSetMaps") as IEnumerable);
@@ -108,6 +108,7 @@ namespace Highway.Data
                 {
                     var name = property.GetPropertyValue("EdmProperty").GetPropertyValue("Name");
                     var propertyDetail = mappingDetail.Properties.Single(x => x.Property.Name == name);
+                    propertyDetail.IsGenerated = property.GetPropertyValue("ColumnProperty").GetPropertyValue("StoreGeneratedPattern").ToString() != "None";
                     propertyDetail.ColumnName = property.GetPropertyValue("ColumnProperty").GetPropertyValue("Name").ToString();
                 }
             }

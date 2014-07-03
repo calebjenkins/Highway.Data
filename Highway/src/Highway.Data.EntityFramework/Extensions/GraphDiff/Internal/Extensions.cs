@@ -98,5 +98,6 @@ namespace Highway.Data
         public PropertyInfo Property { get; set; }
 
         public string ColumnName { get; set; }
+        public bool IsGenerated { get; set; }
     }
 }
